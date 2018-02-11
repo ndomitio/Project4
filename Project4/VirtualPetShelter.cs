@@ -13,6 +13,13 @@ namespace Project4
         public List<OtherPets> PetList { get; set; }
         public List<VolunteerEmployee> EmployeeList { get; set; }
 
+        //constructors
+        public VirtualPetShelter()
+        {
 
+        }
+
+        //methods
+        
     }
 }

@@ -27,7 +27,7 @@ namespace Project4
 
         //methods
 
-        public abstract int Feed();
+        public abstract void Feed();
 
         public abstract int GiveWater();
 

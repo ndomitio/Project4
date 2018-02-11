@@ -11,9 +11,12 @@ namespace Project4
         //fields
         //properties
         public bool HasAuthority { get; set; }
-        public OtherPets Mycat { get; set; }
-        public OtherPets Mydog { get; set; }
-        public OtherPets Mydragon { get; set; }
+        public OtherPets myCat { get; set; }
+        public OtherPets myDog { get; set; }
+        public OtherPets myDragon { get; set; }
+        public OtherPets dog2 { get; set; }
+        public OtherPets cat2 { get; set; }
+        public List<OtherPets> PetList { get; set; }
         //constructors 
 
         public Manager()
@@ -21,25 +24,44 @@ namespace Project4
             //default constructor
         }
 
-        public Manager(bool hasAuthority)
+        public Manager(bool hasAuthority, Project4.OtherPets otherPets, Project4.OtherPets otherPets1, Project4.OtherPets otherPets2, Project4.OtherPets otherPets3)
         {
             this.HasAuthority = hasAuthority;
         }
 
         //methods 
+        public int hostVisitor()
+        {
+            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("Enter 1: to adopt");
+            Console.WriteLine("Enter 2: to play with the animals");
+            Console.WriteLine("Enter 3: to check out the dragon!");
+            Console.WriteLine("Enter 4: to leave");
+            int visitorSelect1 = int.Parse(Console.ReadLine());
+            return visitorSelect1;
+
+        }
+
+        public int ManagerGreet()
+        {
+            Console.WriteLine("Welcome to the animal shelter");
+            Console.WriteLine("\nIf you are here to volunteer press 1.\nIf you are here to visit press 2.");
+            int firstChoice1 = int.Parse(Console.ReadLine());
+            return firstChoice1;
+        }
 
         public override int GiveWater()
         {
-            if ((Mycat.HydrationLevel >= 40) || (Mydog.HydrationLevel >= 40) || (Mydragon.HydrationLevel >= 40))
+            if ((myCat.HydrationLevel >= 40) || (myDog.HydrationLevel >= 40) ||(cat2.HydrationLevel >= 40)||(dog2.HydrationLevel >=40))
             {
                 Console.WriteLine("Looks like the animals need water!");
-                return ((Mycat.HydrationLevel = 0) + (Mydog.HydrationLevel = 0) + (Mydragon.HydrationLevel = 0));
+                return ((myCat.HydrationLevel = 0) + (myDog.HydrationLevel = 0) + (dog2.HydrationLevel = 0)+(cat2.HydrationLevel = 0));
             }
 
             else
             {
                 Console.WriteLine("Looks like everyone is good on water for now!");
-                return (Mycat.HydrationLevel) + (Mydog.HydrationLevel) + (Mydragon.HydrationLevel);
+                return (myCat.HydrationLevel) + (myDog.HydrationLevel) + (myDragon.HydrationLevel);
 
             }
         }
@@ -47,24 +69,58 @@ namespace Project4
 
         public override void PlayWithAnimals()
         {
-            Console.WriteLine("Hope it is nice outside, the animals love the outdoors!");
+            Console.WriteLine("Hope it is nice outside, the animals would love to go for a walk!");
         }
 
-        public override int Feed()
+        public override void Feed()
         {
-            if ((Mycat.Hunger >= 30) || (Mydog.Hunger >= 30) || (Mydragon.Hunger >= 30))
+            if ((myCat.Hunger >= 30) || (myDog.Hunger >= 30) || (cat2.Hunger >= 30)||(dog2.Hunger>=30))
             {
                 Console.WriteLine("Time to feed the animals!");
-                return ((Mycat.Hunger = 0) + (Mydog.Hunger = 0) + (Mydragon.Hunger = 0));
+                myCat.Hunger = 0; myDog.Hunger = 0; cat2.Hunger = 0; dog2.Hunger = 0;
             }
             else
             {
                 Console.WriteLine("No one is hungry right now :( ");
-                return (Mycat.Hunger) + (Mydog.Hunger) + (Mydragon.Hunger);
+                
             }
         }
 
         public void Adopt()
-        { } //console writeline the list and ask for user input to select and remove from list?
+        //console writeline the list and ask for user input to select and remove from list?
+        {
+            Console.WriteLine("Here are the animals that we have at our shelter to adopt");
+            foreach (OtherPets pet in PetList)
+            {
+                Console.WriteLine("     Animal type:");
+                Console.WriteLine(pet.PetType);
+                Console.WriteLine("     Animal description:");
+                Console.WriteLine(pet.PetDescription);
+            }
+            if (HasAuthority == true)
+            {
+                Console.WriteLine("\n\nWhich animal would you like to take home? If you would like a cat, press 1 or 3.  For a dog, press 2 or 4.");
+
+                int adoptedAnimal = int.Parse(Console.ReadLine());
+
+                if (adoptedAnimal == 1)
+                {
+                    PetList.Remove(myCat);
+                }
+                if (adoptedAnimal == 2)
+                {
+                    PetList.Remove(myDog);
+                }
+                if (adoptedAnimal == 3)
+                {
+                    PetList.Remove(cat2);
+                }
+                if (adoptedAnimal == 4)
+                {
+                    PetList.Remove(dog2);
+                }
+            }
+            else Console.WriteLine("What would you like to do now");
+        }
     }
 }

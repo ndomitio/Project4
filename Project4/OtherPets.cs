@@ -47,6 +47,8 @@ namespace Project4
             this.PetType = petType;
             this.PetName = petName;
             this.PetDescription = petDescription;
+            this.HydrationLevel = hydrationLevel;
+            this.Hunger = hunger;
         }
         //methods
 
